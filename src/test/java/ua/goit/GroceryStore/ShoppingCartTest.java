@@ -12,6 +12,9 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 public class ShoppingCartTest {
     ShoppingCart shoppingCart = new ShoppingCart(new FoodStuffs());
 
+    //The general idea of unit testing - isolation
+    // we have to mock all responses/information from FoodStuffs object
+
     public ShoppingCartTest() {
     }
 
