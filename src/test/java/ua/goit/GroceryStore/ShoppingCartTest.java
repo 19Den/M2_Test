@@ -1,21 +1,31 @@
 package ua.goit.GroceryStore;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
+@ExtendWith(MockitoExtension.class)
+
 public class ShoppingCartTest {
-    ShoppingCart shoppingCart = new ShoppingCart(new FoodStuffs());
 
     //The general idea of unit testing - isolation
     // we have to mock all responses/information from FoodStuffs object
 
-    public ShoppingCartTest() {
+    @Mock
+    private ShoppingCart shoppingCart;
+
+    @BeforeEach
+    void init() {
+        shoppingCart = new ShoppingCart(new FoodStuffs());
     }
 
     @ParameterizedTest(name = "#{index} - Run test with args={0}")
