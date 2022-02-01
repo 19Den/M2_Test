@@ -9,34 +9,52 @@ public class ShoppingCart {
         this.foodStuffs = foodStuffs;
     }
 
-    public double calculateTotalCost(@NonNull String productCode) {
+    public double calculateTotalCost(@NonNull String allProductCodeInCart) {
         //use such formatting for long lines
+        //true
         // and it will be nice to extract "productCode.length() - productCode.replace("A", "").length()" in separate method
-        double cost_A_InTheShoppingCart = calculateItemDiscountedCost(productCode.length() - productCode.replace("A", "").length(),
+        //true
+        double cost_A_InTheShoppingCart = calculateItemDiscountedCost(quantityOfOneItem(allProductCodeInCart, "A"),
                 foodStuffs.groceryList.get("A").getPrice(), foodStuffs.groceryList.get("A").getPromotionalPrice(),
                 foodStuffs.groceryList.get("A").getPromotionalQuantity());
-        double cost_B_InTheShoppingCart = calculate_Standard_Cost(productCode.length() - productCode.replace("B", "").length(), foodStuffs.groceryList.get("B").getPrice());
-        double cost_C_InTheShoppingCart = calculateItemDiscountedCost(productCode.length() - productCode.replace("C", "").length(), foodStuffs.groceryList.get("C").getPrice(), foodStuffs.groceryList.get("C").getPromotionalPrice(), foodStuffs.groceryList.get("C").getPromotionalQuantity());
-        double cost_D_InTheShoppingCart = calculate_Standard_Cost(productCode.length() - productCode.replace("D", "").length(), foodStuffs.groceryList.get("D").getPrice());
+        double cost_B_InTheShoppingCart = calculateStandardCost(quantityOfOneItem(allProductCodeInCart, "B"),
+                foodStuffs.groceryList.get("B").getPrice());
+        double cost_C_InTheShoppingCart = calculateItemDiscountedCost(quantityOfOneItem(allProductCodeInCart, "C"),
+                foodStuffs.groceryList.get("C").getPrice(), foodStuffs.groceryList.get("C").getPromotionalPrice(),
+                foodStuffs.groceryList.get("C").getPromotionalQuantity());
+        double cost_D_InTheShoppingCart = calculateStandardCost(quantityOfOneItem(allProductCodeInCart, "D"),
+                foodStuffs.groceryList.get("D").getPrice());
 
         return cost_A_InTheShoppingCart + cost_B_InTheShoppingCart + cost_C_InTheShoppingCart + cost_D_InTheShoppingCart;
     }
 
-    private double calculateItemDiscountedCost(int quantityProdactsInTheShoppingCart, double prise, double promotionalPrice, int promotionalQuantity) {
-        double calculate_A_Cost;
-        if (quantityProdactsInTheShoppingCart >= promotionalQuantity) {
+    private double calculateItemDiscountedCost(int quantityOfProductsOfOneKind, double prise, double promotionalPrice, int promotionalQuantity) {
+        if (quantityOfProductsOfOneKind >= promotionalQuantity) {
             // use more brackets for Math operations like
             // ((quantityProdactsInTheShoppingCart / promotionalQuantity) * promotionalPrice) + ((quantityProdactsInTheShoppingCart % promotionalQuantity) * prise)
+            //true
             // anyway such expressions are extremely hard to understand
+            //true
             // try to create more methods with human-readable description (name)
-            calculate_A_Cost = (quantityProdactsInTheShoppingCart / promotionalQuantity) * promotionalPrice + (quantityProdactsInTheShoppingCart % promotionalQuantity) * prise;
-        } else {
-            calculate_A_Cost = quantityProdactsInTheShoppingCart * prise;
-        }
-        return calculate_A_Cost;
+            //true
+            return discountPrice(quantityOfProductsOfOneKind, prise, promotionalPrice, promotionalQuantity);
+        } else
+            return salePriceithoutDiscount(quantityOfProductsOfOneKind, prise);
     }
 
-    private double calculate_Standard_Cost(int quantityProdactsInTheShoppingCart, double price) {
+    private double calculateStandardCost(int quantityProdactsInTheShoppingCart, double price) {
         return quantityProdactsInTheShoppingCart * price;
+    }
+
+    private int quantityOfOneItem(String allProductCodeInCart, String singleProductCode) {
+        return allProductCodeInCart.length() - allProductCodeInCart.replace(singleProductCode, "").length();
+    }
+
+    private double discountPrice(int quantityOfProductsOfOneKind, double prise, double promotionalPrice, int promotionalQuantity) {
+        return ((quantityOfProductsOfOneKind / promotionalQuantity) * promotionalPrice) + ((quantityOfProductsOfOneKind % promotionalQuantity) * prise);
+    }
+
+    private double salePriceithoutDiscount(int quantityOfProductsOfOneKind, double prise) {
+        return quantityOfProductsOfOneKind * prise;
     }
 }
