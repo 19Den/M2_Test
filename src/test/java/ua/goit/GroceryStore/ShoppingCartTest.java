@@ -21,6 +21,10 @@ public class ShoppingCartTest {
     // we have to mock all responses/information from FoodStuffs object
 
     @Mock
+    //Review#2
+    // We shouldn't mock ShoppingCart because we actually test it,
+    //but we have to mock the internal dependency -  FoodStuffs
+    //we have to use when().thenReturn() method for all methods they will be called (for internal objects too)
     private ShoppingCart shoppingCart;
 
     @BeforeEach

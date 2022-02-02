@@ -11,6 +11,8 @@ public class FoodStuffs {
         addProductsList();
     }
 
+    //Review#2
+    //change the filed to private and create accessor methods
     Map<String, Product> groceryList = new HashMap<>();
 
     private void addProductsList() {

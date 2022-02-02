@@ -15,6 +15,8 @@ public class ShoppingCart {
         // and it will be nice to extract "productCode.length() - productCode.replace("A", "").length()" in separate method
         //true
         double cost_A_InTheShoppingCart = calculateItemDiscountedCost(quantityOfOneItem(allProductCodeInCart, "A"),
+                //Review#2
+                //it's a bad practice to call some object directly. groceryList should be private with accessor methods
                 foodStuffs.groceryList.get("A").getPrice(), foodStuffs.groceryList.get("A").getPromotionalPrice(),
                 foodStuffs.groceryList.get("A").getPromotionalQuantity());
         double cost_B_InTheShoppingCart = calculateStandardCost(quantityOfOneItem(allProductCodeInCart, "B"),
