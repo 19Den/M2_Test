@@ -13,7 +13,7 @@ public class FoodStuffs {
 
     //Review#2
     //change the filed to private and create accessor methods
-    Map<String, Product> groceryList = new HashMap<>();
+    private Map<String, Product> groceryList = new HashMap<>();
 
     private void addProductsList() {
         groceryList.put("A", new Product("Яблоко", 1.25, 3.0, 3));

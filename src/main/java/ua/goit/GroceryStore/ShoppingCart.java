@@ -17,15 +17,15 @@ public class ShoppingCart {
         double cost_A_InTheShoppingCart = calculateItemDiscountedCost(quantityOfOneItem(allProductCodeInCart, "A"),
                 //Review#2
                 //it's a bad practice to call some object directly. groceryList should be private with accessor methods
-                foodStuffs.groceryList.get("A").getPrice(), foodStuffs.groceryList.get("A").getPromotionalPrice(),
-                foodStuffs.groceryList.get("A").getPromotionalQuantity());
+                foodStuffs.getGroceryList().get("A").getPrice(), foodStuffs.getGroceryList().get("A").getPromotionalPrice(),
+                foodStuffs.getGroceryList().get("A").getPromotionalQuantity());
         double cost_B_InTheShoppingCart = calculateStandardCost(quantityOfOneItem(allProductCodeInCart, "B"),
-                foodStuffs.groceryList.get("B").getPrice());
+                foodStuffs.getGroceryList().get("B").getPrice());
         double cost_C_InTheShoppingCart = calculateItemDiscountedCost(quantityOfOneItem(allProductCodeInCart, "C"),
-                foodStuffs.groceryList.get("C").getPrice(), foodStuffs.groceryList.get("C").getPromotionalPrice(),
-                foodStuffs.groceryList.get("C").getPromotionalQuantity());
+                foodStuffs.getGroceryList().get("C").getPrice(), foodStuffs.getGroceryList().get("C").getPromotionalPrice(),
+                foodStuffs.getGroceryList().get("C").getPromotionalQuantity());
         double cost_D_InTheShoppingCart = calculateStandardCost(quantityOfOneItem(allProductCodeInCart, "D"),
-                foodStuffs.groceryList.get("D").getPrice());
+                foodStuffs.getGroceryList().get("D").getPrice());
 
         return cost_A_InTheShoppingCart + cost_B_InTheShoppingCart + cost_C_InTheShoppingCart + cost_D_InTheShoppingCart;
     }
